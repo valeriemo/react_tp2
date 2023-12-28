@@ -6,7 +6,7 @@ function App() {
     return (
         <div>
             <Nav />
-            <Header title="Bienvenue sur votre bibliothèthe cinématographique" />
+            <Header title="Bienvenue" text="Votre bibliothéque cinématographique personnelle !"/>
         </div>
     );
 }
