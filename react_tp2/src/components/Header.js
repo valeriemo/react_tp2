@@ -18,6 +18,8 @@ Header.defaultProps = {
 }
 Header.propTypes = {
     title: PropTypes.string.isRequired,
-    text: PropTypes.string
+    text: PropTypes.string,
+    onClick: PropTypes.func.isRequired
+
 }
 export default Header;
