@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const Nav = () => {
     return (
-        <nav className="bg-[#030027] p-6">
+        <nav className="bg-gray-900 p-6">
             <div className="container mx-auto flex justify-between items-center">
                 <a href="#" className="text-[#F2F3D9] text-lg font-semibold">
                     LOGO

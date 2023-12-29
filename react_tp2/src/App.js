@@ -5,7 +5,7 @@ import Movies from "./components/Movies";
 
 function App() {
     return (
-        <div>
+        <div className="bg-gray-900 h-screen">
             <Nav />
             <Header title="Bienvenue" text="Votre bibliothéque cinématographique personnelle !"/>
             <Movies />
