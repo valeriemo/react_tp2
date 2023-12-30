@@ -1,39 +1,8 @@
 import Movie from "./Movie";
+import { useState, useEffect } from "react";
 
-const movies = [
-    {
-        id: 1,
-        title: "The Shawshank Redemption",
-        year: 1994,
-        director: "Frank Darabont",
-        duration: "2h 22min",
-        genre: ["Crime", "Drama"],
-        myRating: 3,
-        favorite: false
-    },
-    {
-        id: 2,
-        title: "The Godfather",
-        year: 1972,
-        director: "Francis Ford Coppola",
-        duration: "2h 55min",
-        genre: ["Crime", "Drama"],
-        myRating: 4.5,
-        favorite: false
-    },
-    {
-        id: 3,
-        title: "The Godfather: Part II",
-        year: 1974,
-        director: "Francis Ford Coppola",
-        duration: "3h 22min",
-        genre: ["Crime", "Drama"],
-        myRating: undefined,
-        favorite: false
-    },
-];
 
-const Movies = () => {
+const Movies = ({movies, onDelete}) => {
     return (
         <section>
             <h2 class="text-2xl font-semibold text-white mt-5 mb-5 text-center">Vos films</h2>
@@ -72,7 +41,7 @@ const Movies = () => {
                        
                     {movies.length === 0 && <p>No movies to show</p>}
                     {movies.map((movie) => (
-                        <Movie key={movie.id} movie={movie} />
+                        <Movie movie={movie} onDelete={onDelete} />
                     ))}
 
                     </tbody>
