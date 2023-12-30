@@ -1,5 +1,4 @@
 import { FaTimes } from 'react-icons/fa';
-import { GrEdit } from "react-icons/gr";
 import RatingStars from "../utilitaires/RatingStars";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
@@ -20,7 +19,7 @@ const Movie = ({movie, onDelete, onToggle}) => {
             </th>
             <td className="px-6 py-4">{movie.year}</td>
             <td className="px-6 py-4">{movie.director}</td>
-            <td className="px-6 py-4">{movie.genre.join(", ")}</td>
+            <td className="px-6 py-4">{movie.genre}</td>
             <td className="px-6 py-4">
                 {rating !== "Pas de note" && <RatingStars rating={rating} />}
                 {rating === "Pas de note" && rating}
