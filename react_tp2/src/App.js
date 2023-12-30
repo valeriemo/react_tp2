@@ -49,15 +49,27 @@ function App() {
   },
 ]);
 
+/**
+ * Supprimer un film
+ * @param {*} id Id du film à supprimer
+ */
 const deleteMovie = (id) => {
     setMovies(movies.filter((movie) => movie.id !== id));
+}
+
+/**
+ * Toggle favorite
+ * @param {*} id Id du film à mettre en favoris
+ */
+const toggleFavorite= (id) => {
+    setMovies(movies.map((movie) => movie.id === id ? {...movie, favorite: !movie.favorite} : movie));
 }
 
     return (
         <div className="bg-gray-900 h-screen">
             <Nav />
             <Header title="Bienvenue" text="Votre bibliothéque cinématographique personnelle !"/>
-            <Movies movies={movies} onDelete={deleteMovie}/>
+            <Movies movies={movies} onDelete={deleteMovie} onToggle={toggleFavorite}/>
         </div>
     );
 }

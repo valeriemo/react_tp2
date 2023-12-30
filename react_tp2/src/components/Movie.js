@@ -1,9 +1,9 @@
 import { FaTimes } from 'react-icons/fa';
 import { GrEdit } from "react-icons/gr";
 import RatingStars from "../utilitaires/RatingStars";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
-
-const Movie = ({movie, onDelete}) => {
+const Movie = ({movie, onDelete, onToggle}) => {
     let rating = movie.myRating;
     if (rating === undefined) {
         rating = "Pas de note";
@@ -25,9 +25,9 @@ const Movie = ({movie, onDelete}) => {
                 {rating !== "Pas de note" && <RatingStars rating={rating} />}
                 {rating === "Pas de note" && rating}
             </td>
-            <td className="px-6 py-4">{favorite}</td>
-            <td className="px-6 py-4 text-right">
-                <GrEdit className="pointer text-blue-600 text-xl" />
+            <td className="px-6 py-4" onDoubleClick={() => onToggle(movie.id)}>
+                {favorite === "Oui" && <FaHeart className="text-red-600 text-xl"/>}
+                {favorite === "Non" && <FaRegHeart className='pointer'/>}
             </td>
             <td className="px-6 py-4 text-right">
                 <FaTimes className="pointer text-red text-xl" onClick={()=>onDelete(movie.id)}/>
