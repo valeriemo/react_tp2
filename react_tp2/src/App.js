@@ -67,6 +67,18 @@ function App() {
         );
     };
 
+    /**
+     * Editer un film
+     * @param {*} id 
+     */
+    const editMovie = (id) => {
+      console.log(id);
+    }
+
+    /**
+     * Ajouter un film
+     * @param {*} movie 
+     */
     const addMovie = (movie) => {
         const lastId = movies[movies.length - 1].id;
         const id = lastId + 1;
@@ -74,18 +86,24 @@ function App() {
         setMovies([...movies, newMovie]);
     }
 
+    // [state, setState]
+    const [showAddMovie, setShowAddMovie] = useState(false)
+
     return (
-        <div className="bg-gray-900 h-100">
+        <div className="bg-gray-900">
             <Nav />
             <Header
                 title="Bienvenue"
                 text="Votre bibliothéque cinématographique personnelle !"
+                toggleForm={()=>setShowAddMovie(!showAddMovie)}
+                showAdd={showAddMovie}
             />
-            <AddMovie onAdd={addMovie}/>
+            { showAddMovie && <AddMovie onAdd={addMovie}/> }
             <Movies
                 movies={movies}
                 onDelete={deleteMovie}
                 onToggle={toggleFavorite}
+                onEdit={editMovie}
             />
         </div>
     );

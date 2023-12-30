@@ -1,8 +1,9 @@
 import { FaTimes } from 'react-icons/fa';
 import RatingStars from "../utilitaires/RatingStars";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { RiEdit2Fill } from "react-icons/ri";
 
-const Movie = ({movie, onDelete, onToggle}) => {
+const Movie = ({movie, onDelete, onToggle, onEdit}) => {
     let rating = movie.myRating;
     if (rating === undefined) {
         rating = "Pas de note";
@@ -30,6 +31,9 @@ const Movie = ({movie, onDelete, onToggle}) => {
             </td>
             <td className="px-6 py-4 text-right">
                 <FaTimes className="pointer text-red text-xl" onClick={()=>onDelete(movie.id)}/>
+            </td>
+            <td className="px-6 py-4 text-right">
+                <RiEdit2Fill  className="pointer text-red text-xl" onClick={()=>onEdit(movie.id)}/>
             </td>
     </tr>
     )

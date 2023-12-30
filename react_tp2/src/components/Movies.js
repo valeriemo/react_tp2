@@ -2,7 +2,7 @@ import Movie from "./Movie";
 import { useState, useEffect } from "react";
 
 
-const Movies = ({movies, onDelete, onToggle}) => {
+const Movies = ({movies, onDelete, onToggle, onEdit}) => {
     return (
         <section>
             <h2 className="text-2xl font-semibold text-white mt-5 mb-5 text-center">Vos films</h2>
@@ -26,10 +26,13 @@ const Movies = ({movies, onDelete, onToggle}) => {
                                 Rating
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Favoris
+                                Coup de coeur
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Suppression
+                            </th>
+                            <th scope="col" className="relative px-6 py-3">
+                                Modifier
                             </th>
                         </tr>
                     </thead>
@@ -38,7 +41,7 @@ const Movies = ({movies, onDelete, onToggle}) => {
                        
                     {movies.length === 0 && <p>No movies to show</p>}
                     {movies.map((movie) => (
-                        <Movie movie={movie} onDelete={onDelete} onToggle={onToggle}/>
+                        <Movie movie={movie} onDelete={onDelete} onToggle={onToggle} onEdit={onEdit}/>
                     ))}
 
                     </tbody>
