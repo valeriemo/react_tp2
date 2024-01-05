@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const AddMovie = ({ onAdd }) => {
     const [title, setTitle] = useState("");
@@ -8,9 +8,9 @@ const AddMovie = ({ onAdd }) => {
     const [rating, setRating] = useState();
     const [favorite, setFavorite] = useState(false);
     const [selectedOptions, setSelectedOptions] = useState([]);
-
     const thisYear = new Date().getFullYear();
-
+    
+    
     const handleSelectChange = (e) => {
         const selectedValues = Array.from(
             e.target.selectedOptions,
@@ -23,6 +23,8 @@ const AddMovie = ({ onAdd }) => {
         setSelectedOptions(selectedValues);
         setGenre(selectedValues.join(", "));
     };
+
+
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -39,8 +41,6 @@ const AddMovie = ({ onAdd }) => {
             return;
         }
         onAdd({ title, year: sanitizedYear, director: sanitizedDirector, genre, rating, favorite });
-
-        console.log(thisYear   )
         // Reinitalize the form
         setTitle("");
         setYear("");
@@ -51,8 +51,9 @@ const AddMovie = ({ onAdd }) => {
         setSelectedOptions([]);
     };
 
-    return (
-        <div>
+    return ( 
+       // TODO: Faire une boite modal pour le formulaire avec gradient background
+        <div >
             <h1 className="text-lg text-center pb-5 text-white font-semibold">
                 Saisir un nouveau film
             </h1>
@@ -152,6 +153,7 @@ const AddMovie = ({ onAdd }) => {
                 </div>
                 <button
                     type="submit"
+                    onClick={submitForm} 
                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                     Enregistrer

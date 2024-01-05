@@ -1,10 +1,9 @@
 import Movie from "./Movie";
-import { useState, useEffect } from "react";
 
 
 const Movies = ({movies, onDelete, onToggle, onEdit}) => {
     return (
-        <section>
+        <section className="mb-8">
             <h2 className="text-2xl font-semibold text-white mt-5 mb-5 text-center">Vos films</h2>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-8">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -41,7 +40,7 @@ const Movies = ({movies, onDelete, onToggle, onEdit}) => {
                        
                     {movies.length === 0 && <p>No movies to show</p>}
                     {movies.map((movie) => (
-                        <Movie movie={movie} onDelete={onDelete} onToggle={onToggle} onEdit={onEdit}/>
+                        <Movie movie={movie} key={movie.id} onDelete={onDelete} onToggle={onToggle} onEdit={onEdit}/>
                     ))}
 
                     </tbody>

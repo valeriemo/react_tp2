@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types'
 import Button from './Button'
-import { useState } from 'react'
 
 const Header = (props) => {
-
 
     return (
         <header className='bg-gray-900'>
@@ -22,7 +20,7 @@ Header.defaultProps = {
 Header.propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func
 
 }
 export default Header;

@@ -1,8 +1,9 @@
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Movies from "./components/Movies";
+import UpdateMovie from "./components/UpdateMovie";
 import AddMovie from "./components/AddMovie";
 
 function App() {
@@ -69,25 +70,51 @@ function App() {
 
     /**
      * Editer un film
-     * @param {*} id 
+     * @param {*} id
      */
     const editMovie = (id) => {
-      console.log(id);
-    }
+        const movieToEdit = movies.find((movie) => movie.id === id);
+        setEditMovieData(movieToEdit);
+        // je veux afficher le formulaire avec les données du film à éditer
+        setShowUpdateMovie(true); // on affiche le formulaire
+    };
+    // [state, setState]
+    const [editMovieData, setEditMovieData] = useState({});
 
     /**
+     *
      * Ajouter un film
-     * @param {*} movie 
+     * @param {*} movie
      */
     const addMovie = (movie) => {
         const lastId = movies[movies.length - 1].id;
         const id = lastId + 1;
         const newMovie = { id, ...movie };
         setMovies([...movies, newMovie]);
-    }
+    };
 
-    // [state, setState]
-    const [showAddMovie, setShowAddMovie] = useState(false)
+    // État local pour le formulaire d'ajout de film
+    const [showAddMovie, setShowAddMovie] = useState(false);
+
+    // État local pour le formulaire de mise à jour de film
+    const [showUpdateMovie, setShowUpdateMovie] = useState(false);
+
+    // Fonction de basculement pour le formulaire d'ajout de film
+    const toggleAddMovie = () => {
+        // Vérifier si le formulaire UpdateMovie est actuellement affiché
+        if (!showUpdateMovie) {
+            setShowAddMovie(!showAddMovie); // Inverse l'état actuel du formulaire d'ajout
+        } else {
+            // Fermer le formulaire UpdateMovie si ouvert
+            setShowUpdateMovie(false);
+        }
+    };
+
+    // Fonction de basculement pour le formulaire de mise à jour de film
+    const toggleUpdateMovie = () => {
+        setShowUpdateMovie(!showUpdateMovie); // on inverse la valeur de l'état local
+        setShowAddMovie(false);
+    };
 
     return (
         <div className="bg-gray-900">
@@ -95,10 +122,22 @@ function App() {
             <Header
                 title="Bienvenue"
                 text="Votre bibliothéque cinématographique personnelle !"
-                toggleForm={()=>setShowAddMovie(!showAddMovie)}
-                showAdd={showAddMovie}
+                toggleForm={toggleAddMovie}
+                // Afficher le formulaire d'ajout ou de mise à jour
+                showAdd={showAddMovie || showUpdateMovie}
             />
-            { showAddMovie && <AddMovie onAdd={addMovie}/> }
+            {showAddMovie && !showUpdateMovie && (
+                <AddMovie onAdd={addMovie} setShowAddMovie={toggleAddMovie} />
+            )}
+
+            {showUpdateMovie && !showAddMovie && (
+                <UpdateMovie
+                    onUpdate={editMovie}
+                    movieData={editMovieData}
+                    setShowUpdateMovie={toggleUpdateMovie}
+                />
+            )}
+
             <Movies
                 movies={movies}
                 onDelete={deleteMovie}
