@@ -5,12 +5,10 @@ import { RiEdit2Fill } from "react-icons/ri";
 
 const Movie = ({movie, onDelete, onToggle, onEdit}) => {
     let rating = movie.myRating;
-    console.log(rating)
     if (rating === undefined || rating === 0) {
         rating = "Pas de note";
     }
     const favorite = movie.favorite ? "Oui" : "Non";
-    console.log(rating)
     return (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <th

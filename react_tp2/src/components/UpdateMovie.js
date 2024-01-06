@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import RatingInput from "./RatingInput";
 
 const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
     // États locaux pour les différentes propriétés du film
@@ -8,9 +9,18 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
     const [selectedOptions, setSelectedOptions] = useState(
         movieData.genre.split(", ")
     );
-    const [rating, setRating] = useState(movieData.myRating);
+    const [newRating, setNewRating] = useState(movieData.myRating); // Nouvelle variable d'état pour la valeur du rating
     const [favorite, setFavorite] = useState(movieData.favorite);
     const thisYear = new Date().getFullYear();
+
+    // Fonction de rappel pour mettre à jour la valeur du rating
+    const handleRatingChange = (newRating) => {
+        if (newRating > 5 || newRating < 1) {
+            alert("La note doit être comprise entre 1 et 5");
+            return;
+        }
+        setNewRating(newRating);
+    };
 
     /**
      * Fonction appelée lors de la soumission du formulaire
@@ -20,25 +30,27 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
     const submitForm = (e) => {
         e.preventDefault();
         // Création d'un objet contenant les données mises à jour du film
-        const updatedMovieData = {
-            title,
-            year,
-            director,
-            genre: selectedOptions.join(", "),
-            myRating: rating,
-            favorite,
-        };
         // Validation
         if (year > thisYear) {
             alert("L'année ne peut pas être supérieure à l'année actuelle");
             return;
         }
-        if (rating > 5 || rating < 1) {
+        if (newRating > 5 || newRating < 1) {
             alert("La note doit être comprise entre 1 et 5");
             return;
         }
+        const updatedMovieData = {
+            title,
+            year,
+            director,
+            genre: selectedOptions.join(", "),
+            myRating: newRating,
+            favorite,
+        };
+
         // Appeler la fonction de mise à jour du film passée en tant que prop
         onUpdate(updatedMovieData);
+
         console.log(updatedMovieData);
         // Fermer le formulaire après la mise à jour
         setShowUpdateMovie(false);
@@ -60,8 +72,8 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
 
     // Rendu du composant
     return (
-        <div>
-            <h1 className="text-lg text-center pb-5 text-white font-semibold">
+        <div className="max-w-[38%] min-w-[30%] mx-auto p-8 border-2 border-blue-700">
+            <h1 className="uppercase text-lg text-center pb-5 text-white font-semibold bg-blue-700 p-4 w-full rounded-md mb-5">
                 Modifier un film
             </h1>
             <form className="max-w-md mx-auto" onSubmit={submitForm}>
@@ -69,7 +81,7 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
                     <input
                         type="text"
                         name="title"
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-blue-600 font-bold dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder="Titre"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -81,7 +93,7 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
                         type="text"
                         name="year"
                         value={year}
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-blue-600 font-bold dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder="Année"
                         max={thisYear}
                         onChange={(e) => setYear(e.target.value)}
@@ -92,7 +104,7 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
                         type="text"
                         name="director"
                         value={director}
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-blue-600 font-bold dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder="Directeur"
                         onChange={(e) => setDirector(e.target.value)}
                     />
@@ -110,6 +122,7 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
                         </span>{" "}
                         :
                     </label>
+                    {/* comment faire pour que les genres soient déjà sélectionnés ? */}
                     <select
                         id="multipleOptions"
                         name="multipleOptions"
@@ -133,17 +146,9 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
                 </div>
 
                 <div className="relative z-0 w-full mb-5 group">
-                    <input
-                        type="text"
-                        name="myRating"
-                        value={rating}
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder="Note sur 5"
-                        onChange={(e) => setRating(e.target.value)}
-                        max={5}
-                        min={1}
-                    />
+                    <RatingInput onRatingChange={handleRatingChange} initialRating={newRating} />
                 </div>
+
                 <div className="flex items-start mb-5">
                     <div className="flex items-center h-5">
                         <input

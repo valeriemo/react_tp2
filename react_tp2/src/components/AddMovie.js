@@ -70,7 +70,7 @@ const AddMovie = ({ onAdd }) => {
     };
 
     return (
-        <div className="max-w-[38%] mx-auto p-8 border-2 border-blue-700">
+        <div className="max-w-[38%] min-w-[30%] mx-auto p-8 border-2 border-blue-700">
             <h1 className="uppercase text-lg text-center pb-5 text-white font-semibold bg-blue-700 p-4 w-full rounded-md mb-5">
                 Saisir un nouveau film
             </h1>

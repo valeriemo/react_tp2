@@ -1,29 +1,38 @@
 // Votre composant de formulaire
-import React, { useState } from 'react';
-import StarIcon from './StarIcon';
+import React, { useState, useEffect } from "react";
+import StarIcon from "./StarIcon";
 
-const RatingInput = ({ onRatingChange }) => {
-  const [rating, setRating] = useState(0);
+const RatingInput = ({ onRatingChange, initialRating }) => {
+  console.log(initialRating);
 
-  const handleStarClick = (selectedRating) => {
-    setRating(selectedRating);
-  };
+    const [rating, setRating] = useState(initialRating || 0);
 
-  return (
-    <div className="flex items-center mb-5">
-      <p className="mr-2 text-white">Note sur 5 :</p>
-      {[1, 2, 3, 4, 5].map((star) => (
-        <StarIcon
-          key={star}
-          selected={star <= rating}
-          onSelect={() => {
-            handleStarClick(star)
-            onRatingChange(star)}}
-        />
-      ))}
-      <span className="ml-2 text-white">{rating}/5</span>
-    </div>
-  );
+    useEffect(() => {
+        // Utilisez initialRating ici si vous devez effectuer une action lorsqu'il change
+        console.log("Initial Rating changed:", initialRating);
+    }, [initialRating]);
+
+
+    const handleStarClick = (selectedRating) => {
+        setRating(selectedRating);
+    };
+
+    return (
+        <div className="flex items-center mb-5">
+            <p className="mr-2 text-white">Note sur 5 :</p>
+            {[1, 2, 3, 4, 5].map((star) => (
+                <StarIcon
+                    key={star}
+                    selected={star <= rating}
+                    onSelect={() => {
+                        handleStarClick(star);
+                        onRatingChange(star);
+                    }}
+                />
+            ))}
+            <span className="ml-2 text-white">{rating}/5</span>
+        </div>
+    );
 };
 
 export default RatingInput;
