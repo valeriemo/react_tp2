@@ -5,11 +5,12 @@ import { RiEdit2Fill } from "react-icons/ri";
 
 const Movie = ({movie, onDelete, onToggle, onEdit}) => {
     let rating = movie.myRating;
-    if (rating === undefined) {
+    console.log(rating)
+    if (rating === undefined || rating === 0) {
         rating = "Pas de note";
-    } 
+    }
     const favorite = movie.favorite ? "Oui" : "Non";
-
+    console.log(rating)
     return (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <th
@@ -22,8 +23,7 @@ const Movie = ({movie, onDelete, onToggle, onEdit}) => {
             <td className="px-6 py-4">{movie.director}</td>
             <td className="px-6 py-4">{movie.genre}</td>
             <td className="px-6 py-4">
-                {rating !== "Pas de note" && <RatingStars rating={rating} />}
-                {rating === "Pas de note" && rating}
+                { rating !== "Pas de note" ? <RatingStars rating={rating} /> : rating }
             </td>
             <td className="px-6 py-4" onDoubleClick={() => onToggle(movie.id)}>
                 {favorite === "Oui" && <FaHeart className="text-red-600 text-xl"/>}
@@ -33,7 +33,7 @@ const Movie = ({movie, onDelete, onToggle, onEdit}) => {
                 <FaTimes className="pointer text-red text-xl" onClick={()=>onDelete(movie.id)}/>
             </td>
             <td className="px-6 py-4 text-right">
-                <RiEdit2Fill  className="pointer text-red text-xl" onClick={()=>onEdit(movie.id)}/>
+                <RiEdit2Fill  className="pointer text-red text-xl" onClick={()=>onEdit(movie)}/>
             </td>
     </tr>
     )

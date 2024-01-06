@@ -3,8 +3,8 @@ import Movie from "./Movie";
 
 const Movies = ({movies, onDelete, onToggle, onEdit}) => {
     return (
-        <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-white mt-5 mb-5 text-center">Vos films</h2>
+        <section className="my-8">
+            <h2 className="text-2xl font-bold text-white mt-5 mb-5 text-center">Vos films</h2>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-8">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

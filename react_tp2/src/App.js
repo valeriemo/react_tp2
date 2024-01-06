@@ -32,7 +32,7 @@ function App() {
             year: 1974,
             director: "Francis Ford Coppola",
             genre: "Crime, Drama",
-            myRating: undefined,
+            myRating: 3,
             favorite: false,
         },
         {
@@ -68,19 +68,35 @@ function App() {
         );
     };
 
+    // [state, setState]
+    const [editMovieData, setEditMovieData] = useState({});
     /**
      * Editer un film
      * @param {*} id
      */
-    const editMovie = (id) => {
-        const movieToEdit = movies.find((movie) => movie.id === id);
+    const editMovie = (movieEdit) => {
+        const movieToEdit = movies.find((movie) => movie.id === movieEdit.id);
         setEditMovieData(movieToEdit);
         // je veux afficher le formulaire avec les données du film à éditer
         setShowUpdateMovie(true); // on affiche le formulaire
     };
-    // [state, setState]
-    const [editMovieData, setEditMovieData] = useState({});
 
+    /**
+     * Update un film
+     * @param {*} updatedMovieData 
+     */
+    const onUpdate = (updatedMovieData) => {
+        // Mettre à jour le film
+        setMovies(
+            movies.map((movie) =>
+                movie.id === updatedMovieData.id
+                    ? { ...movie, ...updatedMovieData }
+                    : movie
+            )
+        );
+        // Fermer le formulaire
+        setShowUpdateMovie(false);
+    }
     /**
      *
      * Ajouter un film
@@ -132,9 +148,9 @@ function App() {
 
             {showUpdateMovie && !showAddMovie && (
                 <UpdateMovie
-                    onUpdate={editMovie}
                     movieData={editMovieData}
                     setShowUpdateMovie={toggleUpdateMovie}
+                    onUpdate={onUpdate}
                 />
             )}
 
@@ -142,7 +158,7 @@ function App() {
                 movies={movies}
                 onDelete={deleteMovie}
                 onToggle={toggleFavorite}
-                onEdit={editMovie}
+                onEdit={movie=>editMovie(movie)}
             />
         </div>
     );
