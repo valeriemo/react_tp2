@@ -56,7 +56,7 @@ const AddMovie = ({ onAdd }) => {
             year: sanitizedYear,
             director: sanitizedDirector,
             genre,
-            rating: newRating,
+            myRating: newRating,
             favorite,
         });
         // Reinitalize the form

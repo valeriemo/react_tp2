@@ -50,7 +50,6 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
 
         // Appeler la fonction de mise à jour du film passée en tant que prop
         onUpdate(updatedMovieData);
-
         console.log(updatedMovieData);
         // Fermer le formulaire après la mise à jour
         setShowUpdateMovie(false);

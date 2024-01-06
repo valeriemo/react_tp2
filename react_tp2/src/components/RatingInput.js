@@ -3,13 +3,10 @@ import React, { useState, useEffect } from "react";
 import StarIcon from "./StarIcon";
 
 const RatingInput = ({ onRatingChange, initialRating }) => {
-  console.log(initialRating);
 
     const [rating, setRating] = useState(initialRating || 0);
 
     useEffect(() => {
-        // Utilisez initialRating ici si vous devez effectuer une action lorsqu'il change
-        console.log("Initial Rating changed:", initialRating);
     }, [initialRating]);
 
 

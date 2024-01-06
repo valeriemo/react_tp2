@@ -68,6 +68,7 @@ const Movies = () => {
 
     // [state, setState]
     const [editMovieData, setEditMovieData] = useState({});
+
     /**
      * Editer un film
      * @param {*} id
@@ -75,7 +76,6 @@ const Movies = () => {
     const editMovie = (movieEdit) => {
         const movieToEdit = movies.find((movie) => movie.id === movieEdit.id);
         setEditMovieData(movieToEdit);
-        // je veux afficher le formulaire avec les données du film à éditer
         setShowUpdateMovie(true); // on affiche le formulaire
     };
 
