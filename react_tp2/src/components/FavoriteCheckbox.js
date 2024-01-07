@@ -1,6 +1,5 @@
 import React from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { useState } from "react";
 
 const FavoriteCheckbox = ({ isChecked, onChange }) => {
     return (

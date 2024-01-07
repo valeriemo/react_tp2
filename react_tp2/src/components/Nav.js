@@ -7,12 +7,9 @@ const Nav = () => {
                 <Link to="/" className="text-[#F2F3D9] text-lg font-semibold">
                     LOGO
                 </Link>
-                <Link to="/films" className="text-[#F2F3D9]">
+                <Link to="/films" className="text-[#F2F3D9] text-lg font-semibold hover:bg-[#e9295c] p-2">
                     Les films
                 </Link>
-                {/* <NavLink className="text-white text-lg font-semibold" to="/"><img>Logo</img></NavLink>
-        <NavLink class="text-white" to="/">Accueil</NavLink>
-        <NavLink to="/a-rropos">À propos</NavLink> */}
             </div>
         </nav>
     );

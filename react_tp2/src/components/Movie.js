@@ -1,5 +1,5 @@
 import { FaTimes } from 'react-icons/fa';
-import RatingStars from "../utilitaires/RatingStars";
+import RatingStars from "./RatingStars";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { RiEdit2Fill } from "react-icons/ri";
 
@@ -9,8 +9,9 @@ const Movie = ({movie, onDelete, onToggle, onEdit}) => {
         rating = "Pas de note";
     }
     const favorite = movie.favorite ? "Oui" : "Non";
+    
     return (
-        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+        <tr className="border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
             <th
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" 
@@ -24,14 +25,14 @@ const Movie = ({movie, onDelete, onToggle, onEdit}) => {
                 { rating !== "Pas de note" ? <RatingStars rating={rating} /> : rating }
             </td>
             <td className="px-6 py-4" onDoubleClick={() => onToggle(movie.id)}>
-                {favorite === "Oui" && <FaHeart className="text-[#e9295c] text-xl"/>}
-                {favorite === "Non" && <FaRegHeart className='pointer'/>}
+                {favorite === "Oui" && <FaHeart className="text-[#e9295c] text-xl cursor-pointer"/>}
+                {favorite === "Non" && <FaRegHeart className='cursor-pointer'/>}
             </td>
             <td className="px-6 py-4 text-right">
-                <FaTimes className="pointer text-red text-xl" onClick={()=>onDelete(movie.id)}/>
+                <FaTimes className="cursor-pointer text-xl hover:text-[#ff7900] " onClick={()=>onDelete(movie.id)}/>
             </td>
             <td className="px-6 py-4 text-right">
-                <RiEdit2Fill  className="pointer text-red text-xl" onClick={()=>onEdit(movie)}/>
+                <RiEdit2Fill  className="cursor-pointer text-xl hover:text-[#BAFF29]" onClick={()=>onEdit(movie)}/>
             </td>
     </tr>
     )

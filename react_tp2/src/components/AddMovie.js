@@ -40,8 +40,9 @@ const AddMovie = ({ onAdd }) => {
     const handleFavoriteChange = () => {
         // Mettre à jour l'état lorsque la boîte est cochée ou décochée
         setIsFavorite(!isFavorite);
+        setFavorite(!favorite);
     };
-    
+
     const submitForm = (e) => {
         e.preventDefault();
 
@@ -79,8 +80,8 @@ const AddMovie = ({ onAdd }) => {
     };
 
     return (
-        <div className="max-w-[38%] min-w-[30%] mx-auto p-8 border-2 border-[#5889c1]">
-            <h1 className="uppercase text-lg text-center pb-5 text-white font-semibold bg-[#5889c1] p-4 w-full rounded-md mb-5">
+        <div className="max-w-[38%] min-w-[30%] mx-auto p-8 border-2 border-[#5889c1] rounded-md">
+            <h1 className="uppercase text-lg text-center text-white font-semibold bg-[#5889c1] p-4 w-full rounded-md mb-5">
                 Saisir un nouveau film
             </h1>
             <form className="max-w-md mx-auto" onSubmit={submitForm}>
@@ -88,7 +89,7 @@ const AddMovie = ({ onAdd }) => {
                     <input
                         type="text"
                         name="title"
-                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
                         placeholder="Titre"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -100,7 +101,7 @@ const AddMovie = ({ onAdd }) => {
                         type="text"
                         name="year"
                         value={year}
-                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
                         placeholder="Année"
                         max={thisYear}
                         onChange={(e) => setYear(e.target.value)}
@@ -111,7 +112,7 @@ const AddMovie = ({ onAdd }) => {
                         type="text"
                         name="director"
                         value={director}
-                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
                         placeholder="Directeur"
                         onChange={(e) => setDirector(e.target.value)}
                     />
@@ -133,7 +134,7 @@ const AddMovie = ({ onAdd }) => {
                         id="multipleOptions"
                         name="multipleOptions"
                         multiple
-                        className="w-full text-xs mt-1 p-2 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                        className="w-full text-xs mt-1 p-2 border rounded focus:ring-3 bg-gray-700 border-gray-600 focus:ring-[#5889c1] ring-offset-gray-800 focus:ring-offset-gray-800"
                         onChange={handleSelectChange}
                         value={selectedOptions}
                     >
@@ -151,7 +152,6 @@ const AddMovie = ({ onAdd }) => {
                     </select>
                 </div>
                 <RatingInput onRatingChange={handleRatingChange} />
-
                 <div className="flex items-start mb-5">
                     <FavoriteCheckbox
                         isChecked={isFavorite}

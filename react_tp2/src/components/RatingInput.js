@@ -19,6 +19,7 @@ const RatingInput = ({ onRatingChange, initialRating }) => {
             <p className="mr-2 text-white">Note sur 5 :</p>
             {[1, 2, 3, 4, 5].map((star) => (
                 <StarIcon
+                    className="cursor-pointer text-[#ffd500]"
                     key={star}
                     selected={star <= rating}
                     onSelect={() => {

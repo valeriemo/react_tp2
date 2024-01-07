@@ -6,13 +6,13 @@ const RatingStars = ({ rating }) => {
     
     // Ajoute les étoiles pleines
     for (let i = 0; i < fullStars; i++) {
-      stars.push(<FaStar key={i} className="text-yellow-200" />);
+      stars.push(<FaStar key={i} className="text-[#ffd500] cursor-pointer" />);
     }
   
     // Remplit le reste avec des étoiles vides (si nécessaire)
     const remainingStars = 5 - stars.length;
     for (let i = 0; i < remainingStars; i++) {
-      stars.push(<FaRegStar  key={`empty-${i}`} className="text-yellow-200" />);
+      stars.push(<FaRegStar  key={`empty-${i}`} className="text-[#ffd500] cursor-pointer" />);
     }
   
     return (
