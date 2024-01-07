@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import Button from './Button'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 // quand on est sur la page d'accueil, on affiche le bouton "voir les films"
 // quand on est sur la page des films, on affiche le bouton "ajouter un film"
 
@@ -24,6 +24,5 @@ Header.propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string,
     onClick: PropTypes.func
-
 }
 export default Header;
