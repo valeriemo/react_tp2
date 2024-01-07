@@ -24,7 +24,7 @@ const Movie = ({movie, onDelete, onToggle, onEdit}) => {
                 { rating !== "Pas de note" ? <RatingStars rating={rating} /> : rating }
             </td>
             <td className="px-6 py-4" onDoubleClick={() => onToggle(movie.id)}>
-                {favorite === "Oui" && <FaHeart className="text-red-600 text-xl"/>}
+                {favorite === "Oui" && <FaHeart className="text-[#e9295c] text-xl"/>}
                 {favorite === "Non" && <FaRegHeart className='pointer'/>}
             </td>
             <td className="px-6 py-4 text-right">

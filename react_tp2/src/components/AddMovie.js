@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RatingInput from "./RatingInput";
+import Button from "./Button";
+import FavoriteCheckbox from "./FavoriteCheckbox";
 
 const AddMovie = ({ onAdd }) => {
     const [title, setTitle] = useState("");
@@ -33,6 +35,13 @@ const AddMovie = ({ onAdd }) => {
         setNewRating(newRating);
     };
 
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const handleFavoriteChange = () => {
+        // Mettre à jour l'état lorsque la boîte est cochée ou décochée
+        setIsFavorite(!isFavorite);
+    };
+    
     const submitForm = (e) => {
         e.preventDefault();
 
@@ -70,8 +79,8 @@ const AddMovie = ({ onAdd }) => {
     };
 
     return (
-        <div className="max-w-[38%] min-w-[30%] mx-auto p-8 border-2 border-blue-700">
-            <h1 className="uppercase text-lg text-center pb-5 text-white font-semibold bg-blue-700 p-4 w-full rounded-md mb-5">
+        <div className="max-w-[38%] min-w-[30%] mx-auto p-8 border-2 border-[#5889c1]">
+            <h1 className="uppercase text-lg text-center pb-5 text-white font-semibold bg-[#5889c1] p-4 w-full rounded-md mb-5">
                 Saisir un nouveau film
             </h1>
             <form className="max-w-md mx-auto" onSubmit={submitForm}>
@@ -79,7 +88,7 @@ const AddMovie = ({ onAdd }) => {
                     <input
                         type="text"
                         name="title"
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder="Titre"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -91,7 +100,7 @@ const AddMovie = ({ onAdd }) => {
                         type="text"
                         name="year"
                         value={year}
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder="Année"
                         max={thisYear}
                         onChange={(e) => setYear(e.target.value)}
@@ -102,7 +111,7 @@ const AddMovie = ({ onAdd }) => {
                         type="text"
                         name="director"
                         value={director}
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder="Directeur"
                         onChange={(e) => setDirector(e.target.value)}
                     />
@@ -111,7 +120,7 @@ const AddMovie = ({ onAdd }) => {
                 <div className="mb-5">
                     <label
                         htmlFor="multipleOptions"
-                        className="text-sm font-medium text-gray-900 dark:text-gray-300"
+                        className="text-sm font-medium text-gray-300"
                     >
                         Genre{" "}
                         <span className="text-xs">
@@ -144,31 +153,17 @@ const AddMovie = ({ onAdd }) => {
                 <RatingInput onRatingChange={handleRatingChange} />
 
                 <div className="flex items-start mb-5">
-                    <div className="flex items-center h-5">
-                        <input
-                            value={favorite}
-                            id="favorite"
-                            type="checkbox"
-                            onChange={(e) =>
-                                setFavorite(e.currentTarget.checked)
-                            }
-                            className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                        />
-                    </div>
-                    <label
-                        htmlFor="favorite"
-                        className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                        Mettre dans ses coups de coeurs
-                    </label>
+                    <FavoriteCheckbox
+                        isChecked={isFavorite}
+                        onChange={handleFavoriteChange}
+                    />
                 </div>
-                <button
+                <Button
                     type="submit"
+                    text="Enregistrer"
                     onClick={submitForm}
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                    Enregistrer
-                </button>
+                    btnStyle={"btn-1"}
+                />
             </form>
         </div>
     );

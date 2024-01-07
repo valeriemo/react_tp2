@@ -131,7 +131,7 @@ const Movies = () => {
     };
 
     return (
-        <div>
+        <main className="flex-1">
             <Header
                 title="Bienvenue sur votre vidéothéque"
                 text="Votre bibliothéque cinématographique personnelle !"
@@ -159,7 +159,7 @@ const Movies = () => {
                 </h2>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-8">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <thead className="text-xs text-gray-800 uppercase bg-[#6290C3]">
                             <tr>
                                 <th scope="col" className="px-6 py-3">
                                     Titre
@@ -203,7 +203,7 @@ const Movies = () => {
                     </table>
                 </div>
             </section>
-        </div>
+        </main>
     );
 };
 

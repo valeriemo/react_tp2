@@ -1,11 +1,33 @@
 /* Tailwindcss */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,800;1,6..12,400&display=swap');
+
+:root {
+--color-dark: rgb(17 24 39);
+--color-secondary: #F2F2F2;
+--color-tertiary: #F2F2F2; 
+--color-white: #FBFAF8;
+--color-pale: #C2E7DA;
+--blue: #5889c1;
+}
+
+body {
+    @apply bg-gray-900 min-h-screen flex flex-col;
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--color-white);
+    width: 100vw;
+    height: 100vh;
+}
+
+.bg-primary {
+background-color: var(--color-dark);
+}
 
 .btn-1{
-    @apply text-white bg-[#C16E70] hover:bg-blue-700 font-semibold rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2;
+    @apply block mx-auto mt-8 text-white bg-[#5889c1] hover:bg-[#6399d7] font-semibold rounded-lg text-sm px-5 py-3.5 text-center mb-2;
 }
 .btn-2{
-    @apply text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br  focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2;
+    @apply text-white font-bold bg-gradient-to-r from-[#5889c1] via-[#7c99bb] to-[#6290C3] hover:bg-gradient-to-br  dark:focus:ring-[#162433] shadow-lg shadow-[#6290C3] dark:shadow-lg dark:shadow-[#628fc3b2] rounded-lg text-lg px-6 py-3.5 text-center me-3 mb-3;
 }
 .btn-red{
-    @apply text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br  focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2;
+    @apply text-white font-bold bg-gradient-to-r from-[#c5302e] via-[#e9295c] to-[#83489e] hover:bg-gradient-to-br   dark:focus:ring-[#733332] shadow-lg shadow-[#c5302e] dark:shadow-lg dark:shadow-[#c5312e92] rounded-lg text-lg px-6 py-3.5 text-center me-3 mb-3;
 }
