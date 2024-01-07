@@ -31,3 +31,10 @@ background-color: var(--color-dark);
 .btn-red{
     @apply text-white mt-20 font-bold bg-gradient-to-r from-[#c5302e] via-[#e9295c] to-[#83489e] hover:bg-gradient-to-br   dark:focus:ring-[#733332] shadow-lg shadow-[#c5302e] dark:shadow-lg dark:shadow-[#c5312e92] rounded-lg text-lg px-6 py-3.5 text-center me-3 mb-3;
 }
+/* LOGO */
+.cls-1 {
+    fill: #fff;
+    stroke-width: 0px;
+    width: 80px;
+    margin-top: 10px;
+  }

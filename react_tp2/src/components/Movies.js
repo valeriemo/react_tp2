@@ -157,7 +157,7 @@ const Movies = () => {
                 <h2 className="text-2xl font-bold text-white mt-5 mb-5 text-center">
                     Vos films
                 </h2>
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-8">
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-40">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-300">
                         <thead className="text-xs text-gray-800 uppercase bg-[#6290C3]">
                             <tr>
