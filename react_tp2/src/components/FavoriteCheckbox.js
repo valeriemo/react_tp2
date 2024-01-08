@@ -1,15 +1,15 @@
 import React from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import PropTypes from "prop-types";
+import PropsTypes from "prop-types";
 
-const FavoriteCheckbox = ({ isChecked, onChange, textLabel }) => {
+const FavoriteCheckbox = ({ isChecked, onChange, text }) => {
     return (
         <div className="flex items-center">
             <label
                 htmlFor="favorite"
                 className="text-sm font-medium dark:text-gray-300 pr-2"
             >
-                {textLabel}
+                {text}
             </label>
             {isChecked ? (
                 <FaHeart
@@ -27,14 +27,13 @@ const FavoriteCheckbox = ({ isChecked, onChange, textLabel }) => {
 };
 
 FavoriteCheckbox.defaultProps = {
-    onChange: () => {},
-    textLabel: "Mettre dans ses coups de coeurs",
+    text: "Mettre dans ses coups de cœur",
 };
 
-FavoriteCheckbox.propTypes = {
-    isChecked: PropTypes.bool.isRequired,
-    onChange: PropTypes.func.isRequired,
-    textLabel: PropTypes.string,
+FavoriteCheckbox.PropsTypes = {
+    isChecked: PropsTypes.bool.isRequired,
+    onChange: PropsTypes.func.isRequired,
+    text: PropsTypes.string,
 };
 
 export default FavoriteCheckbox;
