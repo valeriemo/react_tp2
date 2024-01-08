@@ -44,12 +44,9 @@ const Movies = () => {
         },
     ]);
 
-    // État local pour le formulaire d'ajout de film
+    // État local 
     const [showAddMovie, setShowAddMovie] = useState(false);
-
-    // État local pour le formulaire de mise à jour de film
     const [showUpdateMovie, setShowUpdateMovie] = useState(false);
-    // [state, setState]
     const [editMovieData, setEditMovieData] = useState({});
 
     /**

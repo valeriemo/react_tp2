@@ -14,6 +14,7 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
     const [newRating, setNewRating] = useState(movieData.myRating); // Nouvelle variable d'état pour la valeur du rating
     const [favorite, setFavorite] = useState(movieData.favorite);
     const thisYear = new Date().getFullYear();
+    const [isFavorite, setIsFavorite] = useState(false);
 
     // Fonction de rappel pour mettre à jour la valeur du rating
     const handleRatingChange = (newRating) => {
@@ -67,14 +68,13 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
         // Mettre à jour l'état local
         setSelectedOptions(selectedValues);
     };
-    const [isFavorite, setIsFavorite] = useState(false);
 
     const handleFavoriteChange = () => {
         // Mettre à jour l'état lorsque la boîte est cochée ou décochée
         setIsFavorite(!isFavorite);
         setFavorite(!favorite);
     };
-    // Rendu du composant
+
     return (
         <div className="max-w-[38%] min-w-[30%] mx-auto p-8 border-2 border-[#5889c1]">
             <h1 className="uppercase text-lg text-center pb-5 text-white font-semibold bg-[#5889c1] p-4 w-full rounded-md mb-5">
