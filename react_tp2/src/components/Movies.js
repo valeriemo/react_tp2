@@ -1,6 +1,6 @@
 import Movie from "./Movie";
-import AddMovie from "./AddMovie";
 import UpdateMovie from "./UpdateMovie";
+import AddMovie from "./AddMovie";
 import Header from "./Header";
 import { useState } from "react";
 
@@ -44,6 +44,14 @@ const Movies = () => {
         },
     ]);
 
+    // État local pour le formulaire d'ajout de film
+    const [showAddMovie, setShowAddMovie] = useState(false);
+
+    // État local pour le formulaire de mise à jour de film
+    const [showUpdateMovie, setShowUpdateMovie] = useState(false);
+    // [state, setState]
+    const [editMovieData, setEditMovieData] = useState({});
+
     /**
      * Supprimer un film
      * @param {*} id Id du film à supprimer
@@ -65,9 +73,6 @@ const Movies = () => {
             )
         );
     };
-
-    // [state, setState]
-    const [editMovieData, setEditMovieData] = useState({});
 
     /**
      * Editer un film
@@ -92,11 +97,10 @@ const Movies = () => {
                     : movie
             )
         );
-        // Fermer le formulaire
         setShowUpdateMovie(false);
     };
+
     /**
-     *
      * Ajouter un film
      * @param {*} movie
      */
@@ -106,12 +110,6 @@ const Movies = () => {
         const newMovie = { id, ...movie };
         setMovies([...movies, newMovie]);
     };
-
-    // État local pour le formulaire d'ajout de film
-    const [showAddMovie, setShowAddMovie] = useState(false);
-
-    // État local pour le formulaire de mise à jour de film
-    const [showUpdateMovie, setShowUpdateMovie] = useState(false);
 
     // Fonction de basculement pour le formulaire d'ajout de film
     const toggleAddMovie = () => {
@@ -139,25 +137,22 @@ const Movies = () => {
                 // Afficher le formulaire d'ajout ou de mise à jour
                 showAdd={showAddMovie || showUpdateMovie}
             />
-                {showAddMovie && !showUpdateMovie && (
-                    <AddMovie
-                        onAdd={addMovie}
-                        setShowAddMovie={toggleAddMovie}
-                    />
-                )}
+            {showAddMovie && !showUpdateMovie && (
+                <AddMovie onAdd={addMovie} setShowAddMovie={toggleAddMovie} />
+            )}
 
-                {showUpdateMovie && !showAddMovie && (
-                    <UpdateMovie
-                        movieData={editMovieData}
-                        setShowUpdateMovie={toggleUpdateMovie}
-                        onUpdate={onUpdate}
-                    />
-                )}
-            <section className="my-8">
+            {showUpdateMovie && !showAddMovie && (
+                <UpdateMovie
+                    movieData={editMovieData}
+                    setShowUpdateMovie={toggleUpdateMovie}
+                    onUpdate={onUpdate}
+                />
+            )}
+            <section className="my-6">
                 <h2 className="text-2xl font-bold text-white mt-5 mb-5 text-center">
                     Vos films
                 </h2>
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-40">
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-20">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-300">
                         <thead className="text-xs text-gray-800 uppercase bg-[#6290C3]">
                             <tr>
@@ -196,7 +191,7 @@ const Movies = () => {
                                     key={movie.id}
                                     onDelete={deleteMovie}
                                     onToggle={toggleFavorite}
-                                    onEdit={movie=>editMovie(movie)}
+                                    onEdit={(movie) => editMovie(movie)}
                                 />
                             ))}
                         </tbody>

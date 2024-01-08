@@ -1,14 +1,15 @@
 import React from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import PropsTypes from "prop-types";
 
-const FavoriteCheckbox = ({ isChecked, onChange }) => {
+const FavoriteCheckbox = ({ isChecked, onChange, text }) => {
     return (
         <div className="flex items-center">
             <label
                 htmlFor="favorite"
                 className="text-sm font-medium dark:text-gray-300 pr-2"
             >
-                Mettre dans ses coups de coeurs
+                {text}
             </label>
             {/* Utiliser un cœur vide ou un cœur rempli en fonction de l'état isChecked */}
             {isChecked ? (
@@ -24,6 +25,16 @@ const FavoriteCheckbox = ({ isChecked, onChange }) => {
             )}
         </div>
     );
+};
+
+FavoriteCheckbox.defaultProps = {
+    text: "Mettre dans ses coups de cœur",
+};
+
+FavoriteCheckbox.PropsTypes = {
+    isChecked: PropsTypes.bool.isRequired,
+    onChange: PropsTypes.func.isRequired,
+    text: PropsTypes.string,
 };
 
 export default FavoriteCheckbox;
