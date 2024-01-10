@@ -64,7 +64,8 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
 
         const sanitizedYear = year || "N/D";
         const sanitizedDirector = director || "N/D";
-        
+        const sanatizedRating = newRating || "N/D";
+
         if (!title) {
             toastAlert("Écrivez le titre du film au minimum");
         }
@@ -77,7 +78,7 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
             toastAlert("L'année doit être un nombre");
             return;
         }
-        if (newRating > 5 || newRating < 1) {
+        if (newRating !== "N/D" && newRating > 5 || newRating < 1) {
             alert("La note doit être comprise entre 1 et 5");
             return;
         }

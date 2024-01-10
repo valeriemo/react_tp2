@@ -13,9 +13,9 @@ const Movies = () => {
     const [editMovieData, setEditMovieData] = useState({});
 
     /**
-     * 
-     * @param {*} url 
-     * @returns 
+     *
+     * @param {*} url
+     * @returns
      */
     const fetchMovies = async (url) => {
         const res = await fetch(url);
@@ -38,7 +38,7 @@ const Movies = () => {
 
     /**
      * Alerte Toastify
-     * @param {*} text 
+     * @param {*} text
      */
     const toastAlert = (text) => {
         toast.success(text, {
@@ -57,7 +57,10 @@ const Movies = () => {
      * Supprimer un film
      * @param {*} id Id du film à supprimer
      */
-    const deleteMovie = (id) => {
+    const deleteMovie = async (id) => {
+        await fetch(`http://localhost:5000/movies/${id}`, {
+            method: "DELETE",
+        });
         setMovies(movies.filter((movie) => movie.id !== id));
     };
 
@@ -65,7 +68,21 @@ const Movies = () => {
      * Toggle favorite
      * @param {*} id Id du film à mettre en favoris
      */
-    const toggleFavorite = (id) => {
+    const toggleFavorite = async (id) => {
+        const movieToToggle = await fetchMovies(
+            `http://localhost:5000/movies/${id}`
+        );
+        const updatedMovie = {
+            ...movieToToggle,
+            favorite: !movieToToggle.favorite,
+        };
+        const res = await fetch(`http://localhost:5000/movies/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(updatedMovie),
+        });
         setMovies(
             movies.map((movie) =>
                 movie.id === id
@@ -79,8 +96,12 @@ const Movies = () => {
      * Editer un film
      * @param {*} id
      */
-    const editMovie = (movieEdit) => {
-        const movieToEdit = movies.find((movie) => movie.id === movieEdit.id);
+    const editMovie = async (movieEdit) => {
+        const response = await fetch(
+            `http://localhost:5000/movies/${movieEdit.id}`
+        );
+        const movieToEdit = await response.json();
+        // Mettre à jour l'état du film à éditer
         setEditMovieData(movieToEdit);
         setShowUpdateMovie(true); // on affiche le formulaire
     };
@@ -89,7 +110,18 @@ const Movies = () => {
      * Update un film
      * @param {*} updatedMovieData
      */
-    const onUpdate = (updatedMovieData) => {
+    const onUpdate = async (updatedMovieData) => {
+        const res = await fetch(
+            `http://localhost:5000/movies/${updatedMovieData.id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify(updatedMovieData),
+            }
+        );
+        const data = await res.json();
         setMovies(
             movies.map((movie) =>
                 movie.id === updatedMovieData.id
@@ -113,10 +145,24 @@ const Movies = () => {
      * Ajouter un film
      * @param {*} movie
      */
-    const addMovie = (movie) => {
-        const lastId = movies[movies.length - 1].id;
-        const id = lastId + 1;
-        const newMovie = { id, ...movie };
+    const addMovie = async (movie) => {
+        const res = await fetch("http://localhost:5000/movies", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(movie),
+        });
+        // Trouver le plus grand ID existant
+        const lastId =
+            movies.length > 0
+                ? Math.max(...movies.map((movie) => movie.id))
+                : 0;
+
+        // Utiliser le nouvel ID pour le nouveau film
+        const newMovie = { id: lastId + 1, ...movie };
+
+        // Mettre à jour l'état des films dans votre application
         setMovies([...movies, newMovie]);
     };
 
