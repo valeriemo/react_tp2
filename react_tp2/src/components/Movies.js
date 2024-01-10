@@ -3,6 +3,7 @@ import UpdateMovie from "./UpdateMovie";
 import AddMovie from "./AddMovie";
 import Header from "./Header";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 const Movies = () => {
     const [movies, setMovies] = useState([
@@ -44,10 +45,23 @@ const Movies = () => {
         },
     ]);
 
-    // État local 
+    // État local
     const [showAddMovie, setShowAddMovie] = useState(false);
     const [showUpdateMovie, setShowUpdateMovie] = useState(false);
     const [editMovieData, setEditMovieData] = useState({});
+
+    const toastAlert = (text) => {
+        toast.success(text, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
+    };
 
     /**
      * Supprimer un film
@@ -86,15 +100,23 @@ const Movies = () => {
      * @param {*} updatedMovieData
      */
     const onUpdate = (updatedMovieData) => {
-        // Mettre à jour le film
         setMovies(
             movies.map((movie) =>
                 movie.id === updatedMovieData.id
-                    ? { ...movie, ...updatedMovieData }
+                    ? {
+                          ...movie,
+                          title: updatedMovieData.title,
+                          year: updatedMovieData.year,
+                          director: updatedMovieData.director,
+                          genre: updatedMovieData.genre,
+                          myRating: updatedMovieData.myRating,
+                          favorite: updatedMovieData.favorite,
+                      }
                     : movie
             )
         );
         setShowUpdateMovie(false);
+        toastAlert("Film modifié avec succès !");
     };
 
     /**
@@ -193,6 +215,7 @@ const Movies = () => {
                             ))}
                         </tbody>
                     </table>
+                    <ToastContainer />
                 </div>
             </section>
         </main>

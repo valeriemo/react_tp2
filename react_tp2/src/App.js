@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Movies from "./components/Movies";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
    

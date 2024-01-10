@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import RatingInput from "./RatingInput";
 import Button from "./Button";
 import FavoriteCheckbox from "./FavoriteCheckbox";
+import { ToastContainer, toast } from "react-toastify";
 
 const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
     // États locaux pour les différentes propriétés du film
+    const [id, setId] = useState(movieData.id);
     const [title, setTitle] = useState(movieData.title);
     const [year, setYear] = useState(movieData.year);
     const [director, setDirector] = useState(movieData.director);
@@ -25,6 +27,31 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
         setNewRating(newRating);
     };
 
+    const toastAlert = (text) => {
+        if (text === "Film modifié avec succès !") {
+            toast.success(text, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }
+        toast.error(text, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
+    };
+
     /**
      * Fonction appelée lors de la soumission du formulaire
      * @param {*} e
@@ -34,8 +61,20 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
         e.preventDefault();
         // Création d'un objet contenant les données mises à jour du film
         // Validation
+
+        const sanitizedYear = year || "N/D";
+        const sanitizedDirector = director || "N/D";
+        
+        if (!title) {
+            toastAlert("Écrivez le titre du film au minimum");
+        }
         if (year > thisYear) {
-            alert("L'année ne peut pas être supérieure à l'année actuelle");
+            toastAlert(
+                "L'année ne peut pas être supérieure à l'année actuelle"
+            );
+            return;
+        } else if (year !== "N/D" && !/^\d+$/.test(year)) {
+            toastAlert("L'année doit être un nombre");
             return;
         }
         if (newRating > 5 || newRating < 1) {
@@ -43,15 +82,15 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
             return;
         }
         const updatedMovieData = {
+            id,
             title,
-            year,
-            director,
+            year : sanitizedYear,
+            director : sanitizedDirector,
             genre: selectedOptions.join(", "),
             myRating: newRating,
             favorite,
         };
         onUpdate(updatedMovieData);
-        console.log(updatedMovieData);
         setShowUpdateMovie(false);
     };
 
@@ -85,7 +124,7 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
                     <input
                         type="text"
                         name="title"
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-[#5889c1] font-bold dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
+                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2  appearance-none text-[#5889c1] font-bold border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
                         placeholder="Titre"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -97,7 +136,7 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
                         type="text"
                         name="year"
                         value={year}
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-[#5889c1] font-bold dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
+                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2  appearance-none text-[#5889c1] font-bold border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
                         placeholder="Année"
                         max={thisYear}
                         onChange={(e) => setYear(e.target.value)}
@@ -108,7 +147,7 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
                         type="text"
                         name="director"
                         value={director}
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-[#5889c1] font-bold dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
+                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2  appearance-none text-[#5889c1] font-bold border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
                         placeholder="Directeur"
                         onChange={(e) => setDirector(e.target.value)}
                     />
@@ -117,7 +156,7 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
                 <div className="mb-5">
                     <label
                         htmlFor="multipleOptions"
-                        className="text-sm font-medium text-gray-900 dark:text-gray-300"
+                        className="text-sm font-medium text-gray-300"
                     >
                         Genre{" "}
                         <span className="text-xs">
@@ -126,12 +165,11 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
                         </span>{" "}
                         :
                     </label>
-                    {/* comment faire pour que les genres soient déjà sélectionnés ? */}
                     <select
                         id="multipleOptions"
                         name="multipleOptions"
                         multiple
-                        className="w-full text-xs mt-1 p-2 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-[#5889c1] dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                        className="w-full text-xs mt-1 p-2 border rounded focus:ring-3 bg-gray-700 border-gray-600 focus:ring-[#5889c1] ring-offset-gray-800 focus:ring-offset-gray-800"
                         onChange={handleSelectChange}
                         value={selectedOptions}
                     >
@@ -159,8 +197,11 @@ const UpdateMovie = ({ movieData, onUpdate, setShowUpdateMovie }) => {
                     <FavoriteCheckbox
                         isChecked={favorite}
                         onChange={handleFavoriteChange}
-                        text={favorite ? "Retirer des coups de cœur" : "Mettre dans ses coups de cœur"}
-
+                        text={
+                            favorite
+                                ? "Retirer des coups de cœur"
+                                : "Mettre dans ses coups de cœur"
+                        }
                     />
                 </div>
                 <Button

@@ -1,5 +1,13 @@
 /* Tailwindcss */
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,800;1,6..12,400&display=swap");
+:root{
+    --toastify-color-error: #e9295c;
+    --toastify-color-success: #baff29;
+    --toastify-font-family: "Nunito Sans", sans-serif;
+    --toastify-toast-width: 400px;
+    --toastify-text-color-success: #162433;
+    --toastify-icon-color-success: #162433;
+}
 body {
     @apply bg-gray-900 min-h-screen flex flex-col;
     font-family: "Nunito Sans", sans-serif;
@@ -14,10 +22,10 @@ body {
     @apply block  mt-8 text-white bg-[#e9295c]  hover:bg-[#ffffff] hover:text-[#e9295c] font-semibold rounded-lg text-lg px-5 py-3.5 text-center mb-2 shadow-lg shadow-[#e9295c79];
 }
 .btn-2 {
-    @apply text-white mt-20 font-bold bg-gradient-to-r from-[#5889c1] via-[#7c99bb] to-[#6290C3] hover:bg-gradient-to-br  dark:focus:ring-[#162433] shadow-lg shadow-[#6290C3] rounded-lg text-lg px-6 py-3.5 text-center me-3 mb-1;
+    @apply text-white mt-20 font-bold bg-gradient-to-r from-[#5889c1] via-[#7c99bb] to-[#6290C3] hover:bg-gradient-to-br focus:ring-[#162433] shadow-lg shadow-[#6290C3] rounded-lg text-lg px-6 py-3.5 text-center me-3 mb-1;
 }
 .btn-red {
-    @apply text-white mt-20 font-bold bg-gradient-to-r from-[#c5302e] via-[#e9295c] to-[#83489e] hover:bg-gradient-to-br   dark:focus:ring-[#733332] shadow-lg shadow-[#e9295c] rounded-lg text-lg px-6 py-3.5 text-center me-3 mb-3;
+    @apply text-white mt-20 font-bold bg-gradient-to-r from-[#c5302e] via-[#e9295c] to-[#83489e] hover:bg-gradient-to-br focus:ring-[#733332] shadow-lg shadow-[#e9295c] rounded-lg text-lg px-6 py-3.5 text-center me-3 mb-3;
 }
 
 /* LOGO */

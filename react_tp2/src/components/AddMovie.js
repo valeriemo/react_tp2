@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import RatingInput from "./RatingInput";
 import Button from "./Button";
 import FavoriteCheckbox from "./FavoriteCheckbox";
+import { ToastContainer, toast } from "react-toastify";
 
 const AddMovie = ({ onAdd }) => {
     const [title, setTitle] = useState("");
@@ -43,22 +44,52 @@ const AddMovie = ({ onAdd }) => {
         setFavorite(!favorite);
     };
 
+    const toastAlert = (text) => {
+        if (text === "Film ajouté avec succès !") {
+            toast.success(text, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        } else {
+            toast.error(text, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }
+    };
     const submitForm = (e) => {
         e.preventDefault();
-
         // Logique conditionnelle pour remplacer par "non renseigné" si vide
         const sanitizedYear = year || "N/D";
         const sanitizedDirector = director || "N/D";
 
         if (!title) {
-            alert("Écrivez le titre du film au minimum");
+            toastAlert("Écrivez le titre du film au minimum");
         }
         if (year > thisYear) {
-            alert("L'année ne peut pas être supérieure à l'année actuelle");
+            toastAlert(
+                "L'année ne peut pas être supérieure à l'année actuelle"
+            );
+            return;
+        } else if (year !== "" && !/^\d+$/.test(year)) {
+            toastAlert("L'année doit être un nombre");
             return;
         }
+
         if (selectedOptions.length === 0) {
-            alert("Sélectionnez au moins un genre");
+            toastAlert("Sélectionnez au moins un genre");
             return;
         }
         onAdd({
@@ -77,6 +108,7 @@ const AddMovie = ({ onAdd }) => {
         setNewRating("");
         setFavorite(false);
         setSelectedOptions([]);
+        toastAlert("Film ajouté avec succès !");
     };
 
     return (
@@ -89,7 +121,7 @@ const AddMovie = ({ onAdd }) => {
                     <input
                         type="text"
                         name="title"
-                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
+                        className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
                         placeholder="Titre"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -101,7 +133,7 @@ const AddMovie = ({ onAdd }) => {
                         type="text"
                         name="year"
                         value={year}
-                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
+                        className="block py-2.5 px-0 w-full text-white text-sm bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
                         placeholder="Année"
                         max={thisYear}
                         onChange={(e) => setYear(e.target.value)}
@@ -112,7 +144,7 @@ const AddMovie = ({ onAdd }) => {
                         type="text"
                         name="director"
                         value={director}
-                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
+                        className="block py-2.5 px-0 w-full text-white text-sm bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-[#5889c1] peer"
                         placeholder="Directeur"
                         onChange={(e) => setDirector(e.target.value)}
                     />
