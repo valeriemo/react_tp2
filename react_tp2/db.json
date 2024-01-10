@@ -1,0 +1,40 @@
+{
+    "movies": [
+        {
+            "id": 1,
+            "title": "The Shawshank Redemption",
+            "year": 1994,
+            "director": "Frank Darabont",
+            "genre": "Crime, Drama",
+            "myRating": 3,
+            "favorite": false
+        },
+        {
+            "id": 2,
+            "title": "The Godfather",
+            "year": 1972,
+            "director": "Francis Ford Coppola",
+            "genre": "Crime Drama",
+            "myRating": 4.5,
+            "favorite": false
+        },
+        {
+            "id": 3,
+            "title": "The Godfather: Part II",
+            "year": 1974,
+            "director": "Francis Ford Coppola",
+            "genre": "Crime, Drama",
+            "myRating": 3,
+            "favorite": false
+        },
+        {
+            "id": 4,
+            "title": "The Dark Knight",
+            "year": 2008,
+            "director": "Christopher Nolan",
+            "genre": "Action, Crime, Drama, Thriller",
+            "myRating": 5,
+            "favorite": false
+        }
+    ]
+}

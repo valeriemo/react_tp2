@@ -2,54 +2,44 @@ import Movie from "./Movie";
 import UpdateMovie from "./UpdateMovie";
 import AddMovie from "./AddMovie";
 import Header from "./Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 const Movies = () => {
-    const [movies, setMovies] = useState([
-        {
-            id: 1,
-            title: "The Shawshank Redemption",
-            year: 1994,
-            director: "Frank Darabont",
-            genre: "Crime, Drama",
-            myRating: 3,
-            favorite: false,
-        },
-        {
-            id: 2,
-            title: "The Godfather",
-            year: 1972,
-            director: "Francis Ford Coppola",
-            genre: "Crime Drama",
-            myRating: 4.5,
-            favorite: false,
-        },
-        {
-            id: 3,
-            title: "The Godfather: Part II",
-            year: 1974,
-            director: "Francis Ford Coppola",
-            genre: "Crime, Drama",
-            myRating: 3,
-            favorite: false,
-        },
-        {
-            id: 4,
-            title: "The Dark Knight",
-            year: 2008,
-            director: "Christopher Nolan",
-            genre: "Action, Crime, Drama, Thriller",
-            myRating: 5,
-            favorite: false,
-        },
-    ]);
-
     // État local
+    const [movies, setMovies] = useState([]);
     const [showAddMovie, setShowAddMovie] = useState(false);
     const [showUpdateMovie, setShowUpdateMovie] = useState(false);
     const [editMovieData, setEditMovieData] = useState({});
 
+    /**
+     * 
+     * @param {*} url 
+     * @returns 
+     */
+    const fetchMovies = async (url) => {
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    };
+
+    /**
+     * Récupérer les films
+     */
+    useEffect(() => {
+        const getMovies = async () => {
+            const moviesFromServer = await fetchMovies(
+                "http://localhost:5000/movies"
+            );
+            setMovies(moviesFromServer);
+        };
+        getMovies();
+    }, []);
+
+    /**
+     * Alerte Toastify
+     * @param {*} text 
+     */
     const toastAlert = (text) => {
         toast.success(text, {
             position: "top-center",
