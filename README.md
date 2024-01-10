@@ -9,6 +9,7 @@ Mon application React représente un site web fictif dans lequel  les utilisateu
 - [🔄 Implémentation du CRUD](#-implémentation-du-crud)
 - [📜 Instruction d’installation](#-instruction-dinstallation)
 - [🌐 Techno](#-techno)
+- [🎥 Vidéo](#-vidéo)
 
 ## 🚀 Scénario 1 ##
 Gestion des films côté client. Mise en place sur WebDev. 
@@ -29,11 +30,11 @@ Installer les dépendances -> npm i
 Démarer l’app -> npm start
 Démarer le server -> npm run server
 
-## 🌐 Techno ##
+## 🌐 Techno: ##
 Framework : REACT.JS ⚛️
 Librairies: Tailwind, React-router-dom, Toastify, React-icons, JSON-server
 
-## 🔗 Références 
+## 🔗 Références: ##
 Merci !! 
 - https://flowbite.com/
 - https://good4college.com/online-course/react-cli-todo-app/fr#92
@@ -42,6 +43,8 @@ Merci !!
 - https://react-icons.github.io/react-icons/
 - https://fkhadra.github.io/react-toastify/introduction/
 
+## 🎥 Vidéo: ##
+https://github.com/valeriemo/react_tp2/assets/7307498/c664bc78-19f2-42d5-8997-4fd5c9efc457
 
 
 
