@@ -31,8 +31,8 @@ Démarer l’app -> npm start
 Démarer le server -> npm run server
 
 ## 🌐 Techno: ##
-Framework : REACT.JS ⚛️
-Librairies: Tailwind, React-router-dom, Toastify, React-icons, JSON-server
+REACT.JS ⚛️
+Tailwind, React-router-dom, Toastify, React-icons, JSON-server
 
 ## 🔗 Références: ##
 Merci !! 
